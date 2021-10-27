@@ -5,7 +5,7 @@ const yaml = require('js-yaml');
 
 const fs   = require('fs');
 
-const doc1 = yaml.load(fs.readFileSync('./data/db.yml', 'utf8'));
+const doc1 = yaml.load(fs.readFileSync('./data/red.yml', 'utf8'));
 
 
 function getIPAddress() {
@@ -28,10 +28,10 @@ var handler = function(request, response) {
   console.log("Received request from " + request.connection.remoteAddress);
   response.writeHead(200);
   response.end("<html><head><style>"+
-  ".red{color:red} .green{color:green}"+
+  ".red{color:red} .green{color:green} .black{color:black}"+
   "</style></head><body>"+
-  "<div class='red'>PodName " + os.hostname() + " running on ip:" +  getIPAddress()  + " DATA:" +   JSON.stringify(doc1)  + "</div>\n"+
-  "<div class='green'>PodName " + os.hostname() + " running on ip:" +  getIPAddress()  + " DATA:" +   JSON.stringify(doc1)  + "</div>\n"+
+  "<div class='black'>PodName " + os.hostname() + " running on ip:" +  getIPAddress()  + "</div>\n"+
+  "<div class='red'>DATA " +  JSON.stringify(doc1)  + "</div>\n"+
   "</body></head>");
   
 };

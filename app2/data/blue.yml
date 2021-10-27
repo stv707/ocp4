@@ -1,0 +1,3 @@
+db:
+    conn: mongodb@user1pass123
+    token: 38937

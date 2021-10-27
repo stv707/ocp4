@@ -5,7 +5,8 @@ const yaml = require('js-yaml');
 
 const fs   = require('fs');
 
-const doc1 = yaml.load(fs.readFileSync('./data/app.yml', 'utf8'));
+const doc1 = yaml.load(fs.readFileSync('./data/blue.yml', 'utf8'));
+
 
 
 function getIPAddress() {
@@ -22,12 +23,17 @@ function getIPAddress() {
   return '0.0.0.0';
 }
 
-console.log("AppRed server starting...");
+console.log("AppBlue server starting...");
 
 var handler = function(request, response) {
   console.log("Received request from " + request.connection.remoteAddress);
   response.writeHead(200);
-  response.end("PodName " + os.hostname() + " running on ip:" +  getIPAddress()  + " DATA:" +   JSON.stringify(doc1)  + "\n");
+  response.end("<html><head><style>"+
+  ".red{color:red} .blue{color:blue} .black{color:black}"+
+  "</style></head><body>"+
+  "<div class='black'>PodName " + os.hostname() + " running on ip:" +  getIPAddress()  + "</div>\n"+
+  "<div class='blue'>DATA " +  JSON.stringify(doc1)  + "</div>\n"+
+  "</body></head>");
   
 };
 var www = http.createServer(handler);
