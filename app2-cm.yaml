@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: dhlapp2
   labels:
-    app: dhlapp1
+    app: dhlapp2
 spec:
   containers:
   - image: docker.io/stv707/dhlapp2:v1 
