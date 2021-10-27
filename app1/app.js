@@ -27,7 +27,12 @@ console.log("AppRed server starting...");
 var handler = function(request, response) {
   console.log("Received request from " + request.connection.remoteAddress);
   response.writeHead(200);
-  response.end("PodName " + os.hostname() + " running on ip:" +  getIPAddress()  + " DATA:" +   JSON.stringify(doc1)  + "\n");
+  response.end("<html><head><style>"+
+  ".red{color:red} .green{color:green}"+
+  "</style></head><body>"+
+  "<div class='red'>PodName " + os.hostname() + " running on ip:" +  getIPAddress()  + " DATA:" +   JSON.stringify(doc1)  + "</div>\n"+
+  "<div class='green'>PodName " + os.hostname() + " running on ip:" +  getIPAddress()  + " DATA:" +   JSON.stringify(doc1)  + "</div>\n"+
+  "</body></head>");
   
 };
 var www = http.createServer(handler);
