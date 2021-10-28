@@ -9,7 +9,7 @@
 
 [student@workstation ~]$ cd ocp4/
 
-[student@workstation ocp4]$ ls -l
+[student@workstation ocp4]$ ls -l 
 ```
 
 
@@ -85,73 +85,52 @@
 - Create DeploymentConfigs 
 
 ```sh 
-[student@workstation ocp4]$ oc new-app --as-deployment-config --name=dhlapp1 https://github.com/stv707/ocp4.git --context-dir=app1
+oc new-app --as-deployment-config --name=dhlapp1 https://github.com/stv707/ocp4.git --context-dir=app1
 
-[student@workstation ocp4]$ oc new-app --as-deployment-config --name=dhlapp2 https://github.com/stv707/ocp4.git --context-dir=app2
+oc new-app --as-deployment-config --name=dhlapp2 https://github.com/stv707/ocp4.git --context-dir=app2
 
-[student@workstation ocp4]$ oc expose service dhlapp1
+oc expose service dhlapp1
 
-[student@workstation ocp4]$ oc expose service dhlapp2
+oc expose service dhlapp2
 
-[student@workstation ocp4]$ oc set volumes dc dhlapp1 --add --configmap-name=dhlconfigmap -m /data
+oc set volumes dc dhlapp1 --add --configmap-name=dhlconfigmap -m /data
 
-[student@workstation ocp4]$ oc set volumes dc dhlapp2 --add  --configmap-name=dhlconfigmap -m /data
+oc set volumes dc dhlapp2 --add  --configmap-name=dhlconfigmap -m /data
 
-[student@workstation ocp4]$ oc set volume dc dhlapp1
+oc set volume dc dhlapp1
 
-[student@workstation ocp4]$ oc set volume dc dhlapp2
+oc set volume dc dhlapp2
 
 ```
 
 ### Step 2
 - Change configmap and update deployment config 
 ```sh 
-[student@workstation ocp4]$ oc set volume dc dhlapp1
+oc set volume dc dhlapp1
 
-[student@workstation ocp4]$ oc set volume dc/dhlapp1 --remove --name=<volume_name_from_above_output>
+oc set volume dc/dhlapp1 --remove --name=<volume_name_from_above_output>
 
-[student@workstation ocp4]$ oc set volume dc dhlapp2
+oc set volume dc dhlapp2
 
-[student@workstation ocp4]$ oc set volume dc/dhlapp2 --remove --name=<volume_name_from_above_output>
+oc set volume dc/dhlapp2 --remove --name=<volume_name_from_above_output>
 
-[student@workstation ocp4]$ oc delete configmaps dhlconfigmap
+oc delete configmaps dhlconfigmap
 * Navigate to app1 and app2 route to verify the config goes default
 
-[student@workstation ocp4]$ vim data/blue.yml
+vim data/blue.yml
 * change some value 
 
-[student@workstation ocp4]$ vim data/red.yml
+vim data/red.yml
 * change some value 
 
-[student@workstation ocp4]$ oc create configmap dhlconfig --from-file=data/
+oc create configmap dhlconfig --from-file=data/
 
-[student@workstation ocp4]$ oc describe configmaps  dhlconfig
+oc describe configmaps  dhlconfig
 
-[student@workstation ocp4]$ oc set volumes dc dhlapp1 --add --configmap-name=dhlconfig -m /data
+oc set volumes dc dhlapp1 --add --configmap-name=dhlconfig -m /data
 
-[student@workstation ocp4]$ oc set volumes dc dhlapp2 --add --configmap-name=dhlconfig -m /data
+oc set volumes dc dhlapp2 --add --configmap-name=dhlconfig -m /data
 
 
 ```
 # END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
